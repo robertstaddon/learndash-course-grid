@@ -146,6 +146,13 @@ if ( '' == $ribbon_text ) {
 }
 
 /**
+ * Filter: Allow HTML in ribbon text
+ *
+ * @param bool   $ribbon_text_allow_html True/false value on whether or not to allow HTML in ribbon text output
+ */
+$ribbon_text_allow_html = apply_filters( 'learndash_course_grid_ribbon_text_allow_html', false );
+
+/**
  * Filter: individual course ribbon class names
  *
  * @param string $class     	 Returned class names
@@ -165,7 +172,7 @@ $thumb_size = isset( $shortcode_atts['thumb_size'] ) && ! empty( $shortcode_atts
 
 			<?php if ( $post->post_type == 'sfwd-courses' ) : ?>
 			<div class="<?php echo esc_attr( $class ); ?>">
-				<?php echo $ribbon_text; ?>
+				<?php echo ( $ribbon_text_allow_html ) ? $ribbon_text : esc_attr( $ribbon_text ); ?>
 			</div>
 			<?php endif; ?>
 
